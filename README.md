@@ -45,6 +45,7 @@ npm run build && npm start
 | **Availability** | `lib/booking.tsx` → `taken()` is a deterministic demo. Replace with your reservation system's availability API. |
 | Booking requests | set `BOOKING_WEBHOOK_URL` (reservation system, CRM, Zapier/Make, Slack). Without it, requests are only logged (no personal data in logs). |
 | Photography | `assets/images/` (same filename = no code change), then `python scripts/grade.py` |
+| Link preview image | `app/opengraph-image.jpg` (1200×630 JPEG; keep it under ~300 KB so WhatsApp shows it) and its alt text in `app/opengraph-image.alt.txt` |
 
 ## Accessibility & performance
 

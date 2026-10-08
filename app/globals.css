@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+/* Brand colours come from config/site.ts as --brand-* variables on <html>. */
+@theme inline {
+  --color-soot: var(--brand-soot, #120e0c);
+  --color-char: var(--brand-char, #1e1815);
+  --color-ash: var(--brand-ash, #ece4d8);
+  --color-ash-2: var(--brand-ash2, #ded4c5);
+  --color-smoke: var(--brand-smoke, #93887c);
+  --color-ember: var(--brand-ember, #ff6b2c);
+
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-martian), ui-monospace, monospace;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@layer base {
+  :root {
+    --gutter: clamp(1rem, 3vw, 3rem);
+  }
+  html {
+    background: var(--color-soot);
+    color: var(--color-ash);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-variation-settings: "opsz" 14;
+    background: var(--color-soot);
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-ember);
+    color: var(--color-soot);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ember);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* display: condensed, light, lowercase — the voice of the menu board */
+  .d-hero {
+    font-weight: 330;
+    font-variation-settings: "opsz" 96, "wdth" 75;
+    font-size: max(5rem, min(22vw, 7.5rem));
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+  }
+  @media (min-width: 640px) {
+    .d-hero {
+      font-size: clamp(5rem, 16vw, 17.5rem);
+    }
+  }
+  .d-xl {
+    font-weight: 340;
+    font-variation-settings: "opsz" 96, "wdth" 78;
+    font-size: clamp(3.1rem, 9.2vw, 9.6rem);
+    line-height: 0.84;
+    letter-spacing: -0.045em;
+  }
+  .d-lg {
+    font-weight: 380;
+    font-variation-settings: "opsz" 72, "wdth" 82;
+    font-size: clamp(2.2rem, 5vw, 4.8rem);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+  }
+  .d-md {
+    font-weight: 450;
+    font-variation-settings: "opsz" 36, "wdth" 88;
+    font-size: clamp(1.45rem, 2.4vw, 2.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  .tick {
+    font-family: var(--font-mono);
+    font-variation-settings: "wdth" 87.5;
+    font-size: 0.68rem;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .num {
+    font-family: var(--font-mono);
+    font-variation-settings: "wdth" 87.5;
+    font-variant-numeric: tabular-nums;
+  }
+  .gloss {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-variation-settings: "opsz" 20;
+  }
+  .body {
+    font-size: clamp(1rem, 1.1vw, 1.12rem);
+    line-height: 1.6;
+  }
+  .wrap {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+  /* the printed menu card: ash paper with a little tooth */
+  .paper {
+    background-color: var(--color-ash);
+    color: var(--color-soot);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.28 0 0 0 0 0.2 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* thermal receipt paper with torn zig-zag ends */
+  .receipt {
+    background: #f4efe6;
+    color: #1b1714;
+    --z: 9px;
+    -webkit-mask:
+      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(2 * var(--z)) 51% repeat-x,
+      conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / calc(2 * var(--z)) 51% repeat-x;
+    mask:
+      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(2 * var(--z)) 51% repeat-x,
+      conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / calc(2 * var(--z)) 51% repeat-x;
+  }
+  .leader {
+    flex: 1;
+    min-width: 1.5rem;
+    border-bottom: 1px dotted currentColor;
+    opacity: 0.35;
+    transform: translateY(-0.3em);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* the wordmark's live coal */
+@keyframes coal {
+  0%,
+  100% {
+    box-shadow: 0 0 7px 1px rgba(255, 107, 44, 0.45);
+    filter: brightness(0.95);
+  }
+  50% {
+    box-shadow: 0 0 14px 3px rgba(255, 107, 44, 0.85);
+    filter: brightness(1.25);
+  }
+}
